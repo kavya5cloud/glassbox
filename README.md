@@ -21,7 +21,7 @@ Wrap your client in one line and watch every LLM call your app makes stream into
 
 ```bash
 pip install glassbox
-glassbox demo   # try it now — no API key required
+glassbox demo   # try it now 
 ```
 
 ---
