@@ -1,31 +1,8 @@
 from textual.app import App, ComposeResult
-from textual.widgets import Header, Footer, Static
+from textual.widgets import Footer, Header
 
-ASCII = r"""
- ███  █      ███   ████  ████ ████   ███  █   █
-█ ░░░ █░    █ ░░█ █ ░░░░█ ░░░░█░░░█ █ ░░█  █ █ ░
-█░ ██░█░░   █████░ ███░░░███░░████░░█░ ░█░  █ ░ ░
-█░░ █░█░░   █░░░█░░ ░░█   ░░█ █░░░█ █░░ █░░█ █ ░
- ███ ░█████ █░░░█░████░░████░░████░░ ███ ░█ ░ █
-"""
+from glassbox.tui.widgets import LiveTraceList
 
-TEXT = f"""
-{ASCII}
-
-DevTools for LLM Applications
-
-Inspect every prompt. Replay every run.
-
-Open source • Local first • Zero telemetry
-
-────────────────────────────────────────────
-
-Waiting for AI traffic...
-
-Run your application in another terminal.
-
-glassbox watch
-"""
 
 class GlassboxApp(App):
 
@@ -35,5 +12,5 @@ class GlassboxApp(App):
 
     def compose(self) -> ComposeResult:
         yield Header()
-        yield Static(TEXT)
+        yield LiveTraceList()
         yield Footer()
