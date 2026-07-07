@@ -1,4 +1,3 @@
-LICENSE
 README.md
 pyproject.toml
 glassbox/__init__.py
@@ -7,6 +6,8 @@ glassbox/cli.py
 glassbox.egg-info/PKG-INFO
 glassbox.egg-info/SOURCES.txt
 glassbox.egg-info/dependency_links.txt
+glassbox.egg-info/entry_points.txt
+glassbox.egg-info/requires.txt
 glassbox.egg-info/top_level.txt
 glassbox/events/__init__.py
 glassbox/events/models.py
