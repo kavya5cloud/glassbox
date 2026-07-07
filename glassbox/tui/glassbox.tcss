@@ -1,0 +1,27 @@
+Screen {
+
+    background: #0d1117;
+
+}
+
+Header {
+
+    background: #7c3aed;
+
+    color: white;
+
+}
+
+Footer {
+
+    background: #161b22;
+
+}
+
+Static {
+
+    padding: 2;
+
+    color: #d1d5db;
+
+}
