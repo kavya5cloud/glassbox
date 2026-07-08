@@ -20,9 +20,11 @@ Wrap your client in one line and watch every LLM call your app makes stream into
 [![License](https://img.shields.io/badge/license-Apache%202.0-blue)](LICENSE)
 
 ```bash
-pip install glassbox
-glassbox demo   # try it now 
+pip install glassboxcli
+glassboxcli demo   # try it now 
 ```
+
+> The package is published as **glassboxcli** on PyPI, but the CLI command and Python package are both named **glassbox**.
 
 ---
 
@@ -58,7 +60,7 @@ Glassbox makes every AI call visible — in real time, in your terminal.
 ## Installation
 
 ```bash
-pip install glassbox
+pip install glassboxcli
 ```
 
 Requires Python 3.9+.
