@@ -1,4 +1,8 @@
+import asyncio
+
 import typer
+
+from glassbox.demo import DemoEngine, ScriptedTraceSource
 from glassbox.tui.app import GlassboxApp
 
 app = typer.Typer(
@@ -18,6 +22,13 @@ def main(ctx: typer.Context):
 def watch():
     """Launch Glassbox."""
     GlassboxApp().run()
+
+
+@app.command()
+def demo():
+    """Run the deterministic scripted demo trace flow."""
+    engine = DemoEngine(source=ScriptedTraceSource(), speed=1.0)
+    asyncio.run(engine.run())
 
 
 if __name__ == "__main__":

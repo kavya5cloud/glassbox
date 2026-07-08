@@ -21,7 +21,7 @@ glassbox = "glassbox.cli:app"
 
 [tool.setuptools]
 include-package-data = true
-packages = ["glassbox", "glassbox.events", "glassbox.intercept", "glassbox.providers", "glassbox.storage", "glassbox.tracing", "glassbox.tui"]
+packages = ["glassbox", "glassbox.demo", "glassbox.events", "glassbox.intercept", "glassbox.providers", "glassbox.storage", "glassbox.tracing", "glassbox.tui"]
 
 [project.urls]
 Homepage = "https://github.com/kavya5cloud/glassbox"
