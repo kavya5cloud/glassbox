@@ -1,14 +1,14 @@
 [build-system]
-requires = ["setuptools>=61", "wheel"]
+requires = ["setuptools<77", "wheel"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "glassbox"
+name = "glassboxcli"
 version = "0.1.0"
 description = "DevTools for LLM Applications"
 readme = "README.md"
 requires-python = ">=3.11"
-
+license = { text = "MIT"}
 dependencies = [
     "textual>=0.70.0",
     "rich>=13.7.0",
@@ -20,4 +20,6 @@ dependencies = [
 glassbox = "glassbox.cli:app"
 
 [tool.setuptools]
-license-files = []
+include-package-data = true
+packages = ["glassbox", "glassbox.events", "glassbox.intercept", "glassbox.providers", "glassbox.storage", "glassbox.tracing", "glassbox.tui"]
+
