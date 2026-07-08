@@ -1,7 +1,8 @@
-from textual.app import App, ComposeResult
-from textual.widgets import Footer, Header
+from __future__ import annotations
 
-from glassbox.tui.widgets import LiveTraceList
+from textual.app import App, ComposeResult
+
+from glassbox.tui.widgets import TraceDashboard
 
 
 class GlassboxApp(App):
@@ -10,7 +11,20 @@ class GlassboxApp(App):
 
     TITLE = "Glassbox"
 
+    BINDINGS = [
+        ("q", "quit", "Quit"),
+        ("ctrl+c", "quit", "Quit"),
+    ]
+
+    def __init__(self, *, demo_mode: bool = False, **kwargs) -> None:
+        super().__init__(**kwargs)
+        self._demo_mode = demo_mode
+
     def compose(self) -> ComposeResult:
-        yield Header()
-        yield LiveTraceList()
-        yield Footer()
+        yield TraceDashboard(demo_mode=self._demo_mode)
+
+    def on_mount(self) -> None:
+        self.set_class(self.size.width < 140, "compact")
+
+    def on_resize(self, event) -> None:  # type: ignore[override]
+        self.set_class(event.size.width < 140, "compact")
