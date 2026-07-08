@@ -23,3 +23,8 @@ glassbox = "glassbox.cli:app"
 include-package-data = true
 packages = ["glassbox", "glassbox.events", "glassbox.intercept", "glassbox.providers", "glassbox.storage", "glassbox.tracing", "glassbox.tui"]
 
+[project.urls]
+Homepage = "https://github.com/kavya5cloud/glassbox"
+Repository = "https://github.com/kavya5cloud/glassbox"
+Issues = "https://github.com/kavya5cloud/glassbox/issues"
+Documentation = "https://github.com/kavya5cloud/glassbox#readme"
