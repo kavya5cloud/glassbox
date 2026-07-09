@@ -15,6 +15,13 @@ from textual.containers import Container, Vertical, VerticalScroll
 from textual.widgets import DataTable, Static
 
 from glassbox.demo import DemoEngine, ScriptedTraceSource
+from glassbox.insights import (
+    Insight,
+    InsightAnalyzer,
+    InsightSeverity,
+    SessionAnalyzer,
+    SessionStatistics,
+)
 from glassbox.tracing import EventBus, Trace
 from glassbox.tracing.bus import default_bus
 
@@ -35,6 +42,12 @@ STATUS_STYLES = {
     "completed": "green",
     "failed": "red",
     "error": "red",
+}
+
+INSIGHT_SEVERITY_STYLES = {
+    InsightSeverity.info: "cyan",
+    InsightSeverity.warning: "yellow",
+    InsightSeverity.critical: "red",
 }
 
 
@@ -101,11 +114,100 @@ def _meta_field(label: str, value: str, *, style: str = "white") -> Text:
     return text
 
 
-def _build_inspector_content(trace: Trace) -> Group:
-    status_label, status_icon = _status_label(trace)
+def _build_insight_card(insight: Insight) -> Panel:
+    severity_style = INSIGHT_SEVERITY_STYLES.get(insight.severity, "cyan")
+    body = Text()
+    body.append(f"{insight.severity.value.capitalize()}\n", style=f"bold {severity_style}")
+    body.append(insight.description, style="white")
+    return Panel(
+        body,
+        title=f"{insight.icon} {insight.title}",
+        border_style=severity_style,
+        padding=(1, 1),
+    )
+
+
+def _build_insights_section(insights: list[Insight]) -> Group:
+    if not insights:
+        return Group(
+            Panel(
+                Text("No notable insights for this request.", style="dim"),
+                border_style="grey30",
+                padding=(1, 1),
+            )
+        )
+
+    return Group(*(_build_insight_card(insight) for insight in insights))
+
+
+def _format_latency(value_ms: float) -> str:
+    if value_ms >= 1_000:
+        return f"{value_ms / 1_000:.1f} s"
+    return f"{value_ms:.0f} ms"
+
+
+def _format_request_summary(trace: Trace) -> str:
+    return f"{trace.provider} / {trace.model} • {trace.input_tokens:,} tokens"
+
+
+def _build_summary_metric(label: str, value: str, *, style: str = "white") -> Text:
+    text = Text()
+    text.append(f"{label}\n", style="dim")
+    text.append(value or "—", style=style)
+    return text
+
+
+def _build_session_summary_content(traces: list[Trace], session_stats: SessionStatistics, insights: list[Insight]) -> Group:
+    total_requests = len(traces)
+    largest_prompt = max(traces, key=lambda trace: trace.input_tokens, default=None)
+    slowest_request = max(traces, key=lambda trace: trace.latency_ms, default=None)
+
+    summary = Table.grid(expand=True, padding=(0, 1))
+    summary.add_column(ratio=1)
+    summary.add_column(ratio=1)
+    summary.add_row(
+        _build_summary_metric("Total Requests", f"{total_requests}", style="bold white"),
+        _build_summary_metric("Average Latency", _format_latency(session_stats.average_latency_ms), style="cyan"),
+    )
+    summary.add_row(
+        _build_summary_metric("Total Tokens", _compact_number(session_stats.total_input_tokens + session_stats.total_output_tokens), style="bold white"),
+        _build_summary_metric("Total Spend", f"${session_stats.total_cost:.4f}", style="magenta"),
+    )
+    summary.add_row(
+        _build_summary_metric(
+            "Largest Prompt",
+            "—" if largest_prompt is None else f"{largest_prompt.input_tokens:,} tokens • {_format_request_summary(largest_prompt)}",
+            style="yellow",
+        ),
+        _build_summary_metric(
+            "Slowest Request",
+            "—" if slowest_request is None else f"{_format_latency(float(slowest_request.latency_ms))} • {_format_request_summary(slowest_request)}",
+            style="red" if session_stats.slowest_latency_ms >= 5_000 else "white",
+        ),
+    )
+    summary.add_row(
+        _build_summary_metric("Retry Count", f"{session_stats.retry_count}", style="yellow" if session_stats.retry_count else "dim"),
+        _build_summary_metric("Error Count", f"{session_stats.error_count}", style="red" if session_stats.error_count else "dim"),
+    )
+
+    return Group(
+        Text("Session Summary", style="bold white"),
+        Panel(summary, border_style="grey30", padding=(1, 1)),
+        Text("Analysis", style="bold white"),
+        _build_insights_section(insights)
+        if insights
+        else Panel(
+            Text("No notable insights for this session.", style="dim"),
+            border_style="grey30",
+            padding=(1, 1),
+        ),
+    )
+
+
+def _build_inspector_content(trace: Trace, insights: list[Insight]) -> Group:
     provider_style = _provider_style(trace.provider)
-    flags = _trace_flags(trace)
     tokens = _token_count(trace)
+    status_label, status_icon = _status_label(trace)
 
     meta = Table.grid(expand=True, padding=(0, 1))
     meta.add_column(ratio=1)
@@ -120,11 +222,6 @@ def _build_inspector_content(trace: Trace) -> Group:
         _meta_field("Latency", f"{trace.latency_ms:,} ms", style=STATUS_STYLES.get(trace.status, "cyan")),
         _meta_field("Tokens", f"{trace.input_tokens:,} in / {trace.output_tokens:,} out", style="cyan"),
         _meta_field("Estimated cost", f"${trace.cost:.4f}", style="magenta"),
-    )
-    meta.add_row(
-        _meta_field("Status", f"{status_icon} {status_label}", style=STATUS_STYLES.get(trace.status, "cyan")),
-        _meta_field("Total tokens", _compact_number(tokens), style="bold white"),
-        _meta_field("Flags", ", ".join(flags) if flags else "None", style="yellow" if flags else "dim"),
     )
 
     prompt_text = Text(trace.prompt or "No prompt captured.", style="white", overflow="fold")
@@ -143,28 +240,26 @@ def _build_inspector_content(trace: Trace) -> Group:
         padding=(1, 1),
     )
 
-    insights_lines = [
-        f"{status_icon} {status_label} trace from {trace.provider} / {trace.model}",
-    ]
-    if trace.latency_ms >= SLOW_LATENCY_MS:
-        insights_lines.append(f"Slow request: {trace.latency_ms:,} ms latency.")
-    if trace.input_tokens >= LARGE_PROMPT_TOKENS:
-        insights_lines.append(f"Large prompt: {trace.input_tokens:,} input tokens.")
-    if "retry" in trace.prompt.lower() or trace.status in {"failed", "error"}:
-        insights_lines.append("Retry path detected.")
-    if trace.status in {"failed", "error"}:
-        insights_lines.append("Terminal error state captured in the feed.")
-    if len(insights_lines) == 1:
-        insights_lines.append("No notable flags on this trace.")
-
-    insights_panel = Panel(
-        Text("\n".join(insights_lines), style="white", overflow="fold"),
-        title="Insights",
-        border_style="yellow",
-        padding=(1, 1),
+    metadata = Table.grid(expand=True, padding=(0, 1))
+    metadata.add_column(ratio=1)
+    metadata.add_column(ratio=1)
+    metadata.add_row(
+        _meta_field("Status", f"{status_icon} {status_label}", style=STATUS_STYLES.get(trace.status, "cyan")),
+        _meta_field("Total tokens", _compact_number(tokens), style="bold white"),
+    )
+    metadata.add_row(
+        _meta_field("Started", trace.started_at.isoformat(), style="dim"),
+        _meta_field("Ended", trace.ended_at.isoformat() if trace.ended_at else "Running", style="dim"),
     )
 
-    return Group(meta, prompt_panel, response_panel, insights_panel)
+    return Group(
+        meta,
+        Text("Insights", style="bold white"),
+        _build_insights_section(insights),
+        prompt_panel,
+        response_panel,
+        Panel(metadata, title="Metadata", border_style="grey30", padding=(1, 1)),
+    )
 
 
 def _build_status_content(summary: TraceSummary) -> Text:
@@ -210,7 +305,7 @@ class TraceFeed(DataTable):
     def _handle_trace(self, trace: Trace) -> None:
         self.call_from_thread(self.append_trace, trace)
 
-    def append_trace(self, trace: Trace) -> None:
+    def append_trace(self, trace: Trace, *, select_row: bool = True) -> None:
         status_label, status_icon = _status_label(trace)
         provider = Text(trace.provider, style=_provider_style(trace.provider))
         model = Text(trace.model, style="bold white")
@@ -247,7 +342,7 @@ class TraceFeed(DataTable):
                 break
 
         self.scroll_end(animate=False, immediate=True)
-        if len(self._row_keys) == 1 or trace.status in TERMINAL_STATUSES:
+        if select_row and (len(self._row_keys) == 1 or trace.status in TERMINAL_STATUSES):
             self.move_cursor(row=self.row_count - 1)
 
     def latest_trace(self) -> Trace | None:
@@ -280,9 +375,13 @@ class TraceFeed(DataTable):
 class TraceInspector(VerticalScroll):
     """Scrollable trace inspector with compact metadata and large detail panels."""
 
-    def __init__(self, *, name: str | None = None) -> None:
+    def __init__(self, analyzer: InsightAnalyzer | None = None, *, name: str | None = None) -> None:
         super().__init__(name=name)
+        self._analyzer = analyzer or InsightAnalyzer()
+        self._session_analyzer = SessionAnalyzer()
         self._content = Static("", classes="trace-inspector-content")
+        self._renderable: object | None = None
+        self._mode = "request"
 
     def compose(self) -> ComposeResult:
         yield self._content
@@ -290,20 +389,40 @@ class TraceInspector(VerticalScroll):
     def on_mount(self) -> None:
         self.show_trace(None)
 
-    def show_trace(self, trace: Trace | None) -> None:
+    def show_trace(self, trace: Trace | None, session_stats: SessionStatistics | None = None) -> None:
+        self._mode = "request"
         if trace is None:
-            self._content.update(
-                Panel(
-                    Text("Waiting for DemoEngine events...", style="dim"),
-                    title="Inspector",
-                    border_style="cyan",
-                    padding=(1, 1),
-                )
+            self._renderable = Panel(
+                Text("Waiting for DemoEngine events...", style="dim"),
+                title="Inspector",
+                border_style="cyan",
+                padding=(1, 1),
             )
+            self._content.update(self._renderable)
             return
 
-        self._content.update(_build_inspector_content(trace))
-        self.scroll_home(animate=False, immediate=True)
+        insights = self._analyzer.analyze(trace, session_stats)
+        self._renderable = _build_inspector_content(trace, insights)
+        self._content.update(self._renderable)
+        if self.is_mounted:
+            self.scroll_home(animate=False, immediate=True)
+
+    def show_session_summary(self, traces: list[Trace], session_stats: SessionStatistics | None = None) -> None:
+        self._mode = "session"
+        stats = session_stats or SessionStatistics()
+        insights = self._session_analyzer.analyze(traces, stats)
+        self._renderable = _build_session_summary_content(traces, stats, insights)
+        self._content.update(self._renderable)
+        if self.is_mounted:
+            self.scroll_home(animate=False, immediate=True)
+
+    @property
+    def renderable_content(self) -> object | None:
+        return self._renderable
+
+    @property
+    def mode(self) -> str:
+        return self._mode
 
 
 class TraceStatusBar(Static):
@@ -332,6 +451,7 @@ class TraceDashboard(Vertical):
         self._demo_task: asyncio.Task[None] | None = None
         self._traces: list[Trace] = []
         self._selected_trace_id: UUID | None = None
+        self._session_mode = False
         self._feed: TraceFeed | None = None
         self._inspector: TraceInspector | None = None
         self._status_bar: TraceStatusBar | None = None
@@ -364,6 +484,7 @@ class TraceDashboard(Vertical):
         engine = DemoEngine(bus=self._bus, source=ScriptedTraceSource(), speed=1.0)
         try:
             await engine.run()
+            self.show_session_summary()
         except asyncio.CancelledError:
             raise
 
@@ -373,15 +494,83 @@ class TraceDashboard(Vertical):
     def _append_trace(self, trace: Trace) -> None:
         self._traces.append(trace)
         if self._feed is not None:
-            self._feed.append_trace(trace)
-        if self._selected_trace_id is None or trace.status in TERMINAL_STATUSES:
+            self._feed.append_trace(trace, select_row=not self._session_mode)
+        if not self._session_mode and (self._selected_trace_id is None or trace.status in TERMINAL_STATUSES):
             self.focus_trace(trace)
+        elif self._session_mode:
+            self.show_session_summary()
         self._refresh_summary()
 
+    def _retry_like(self, trace: Trace) -> bool:
+        prompt = trace.prompt.lower()
+        response = trace.response.lower()
+        return trace.status in {"failed", "error"} or "retry" in prompt or "retry" in response
+
+    def _session_statistics(self, trace: Trace | None = None) -> SessionStatistics:
+        total_input_tokens = sum(item.input_tokens for item in self._traces)
+        total_output_tokens = sum(item.output_tokens for item in self._traces)
+        total_cost = sum(item.cost for item in self._traces)
+        average_latency_ms = (sum(item.latency_ms for item in self._traces) / len(self._traces)) if self._traces else 0.0
+        highest_cost_observed = max((item.cost for item in self._traces), default=None)
+        largest_prompt_tokens = max((item.input_tokens for item in self._traces), default=0)
+        slowest_latency_ms = max((item.latency_ms for item in self._traces), default=0)
+        retry_count = sum(1 for item in self._traces if self._retry_like(item))
+        error_count = sum(1 for item in self._traces if item.status in {"failed", "error"})
+        return SessionStatistics(
+            trace_count=len(self._traces),
+            total_input_tokens=total_input_tokens,
+            total_output_tokens=total_output_tokens,
+            total_cost=total_cost,
+            average_latency_ms=average_latency_ms,
+            retry_count=retry_count,
+            error_count=error_count,
+            largest_prompt_tokens=largest_prompt_tokens,
+            slowest_latency_ms=slowest_latency_ms,
+            highest_cost_observed=highest_cost_observed,
+            current_operation=_trace_operation(trace) if trace is not None else None,
+        )
+
     def focus_trace(self, trace: Trace) -> None:
+        self._session_mode = False
         self._selected_trace_id = trace.id
         if self._inspector is not None:
-            self._inspector.show_trace(trace)
+            self._inspector.show_trace(trace, self._session_statistics(trace))
+
+    def _current_trace(self) -> Trace | None:
+        if self._selected_trace_id is not None:
+            for trace in reversed(self._traces):
+                if trace.id == self._selected_trace_id:
+                    return trace
+        if self._traces:
+            return self._traces[-1]
+        return None
+
+    def show_session_summary(self, session_stats: SessionStatistics | None = None) -> None:
+        self._session_mode = True
+        if self._inspector is not None:
+            self._inspector.show_session_summary(self._traces, session_stats or self._session_statistics())
+
+    def show_request_inspector(self) -> None:
+        trace = self._current_trace()
+        if trace is not None:
+            self.focus_trace(trace)
+
+    def toggle_inspector_mode(self) -> None:
+        if self._session_mode:
+            self.show_request_inspector()
+        else:
+            self.show_session_summary()
+
+    def on_key(self, event) -> None:  # type: ignore[override]
+        if event.key == "tab":
+            self.toggle_inspector_mode()
+            event.stop()
+        elif event.key == "s":
+            self.show_session_summary()
+            event.stop()
+        elif event.key in {"r", "escape"}:
+            self.show_request_inspector()
+            event.stop()
 
     def _refresh_summary(self) -> None:
         if self._status_bar is None:
