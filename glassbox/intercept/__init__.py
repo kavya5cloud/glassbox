@@ -4,7 +4,7 @@ from __future__ import annotations
 
 from typing import Any
 
-from glassbox.providers.openai import OpenAIInterceptor
+from glassbox.providers.manager import get_adapter_for_client
 from glassbox.tracing.bus import EventBus
 
 
@@ -15,7 +15,8 @@ def intercept(client: Any, *, event_bus: EventBus | None = None) -> Any:
 
         event_bus = default_bus
 
-    if hasattr(client, "responses"):
-        return OpenAIInterceptor(client, event_bus=event_bus)
+    adapter = get_adapter_for_client(client)
+    if adapter is not None:
+        return adapter.wrap(client, event_bus=event_bus)
 
     return client

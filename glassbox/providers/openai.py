@@ -4,15 +4,17 @@ from __future__ import annotations
 
 from datetime import datetime, timezone
 from typing import Any
-from types import SimpleNamespace
 
-from glassbox.tracing import EventBus, Trace
+from glassbox.tracing import EventBus
 from glassbox.tracing.builder import TraceBuilder
 from glassbox.tracing.bus import default_bus
+from glassbox.providers.manager import register_adapter
 
 
 class OpenAIInterceptor:
     """Wrap an OpenAI client instance and publish traces for responses.create calls."""
+
+    provider_name = "OpenAI"
 
     def __init__(self, client: Any, event_bus: EventBus | None = None) -> None:
         self._client = client
@@ -20,9 +22,22 @@ class OpenAIInterceptor:
         self._builder = TraceBuilder(event_bus=self._event_bus)
         self.responses = OpenAIResponsesAdapter(client.responses, self._builder)
 
-    def wrap(self, client: Any) -> Any:
+    @classmethod
+    def supports(cls, client: Any) -> bool:
+        """Return ``True`` for OpenAI-compatible clients."""
+        if not hasattr(client, "responses"):
+            return False
+        base_url = str(getattr(client, "base_url", "") or "").lower()
+        if "openrouter" in base_url or "azure" in base_url:
+            return False
+        if hasattr(client, "azure_endpoint"):
+            return False
+        return True
+
+    @classmethod
+    def wrap(cls, client: Any, *, event_bus: EventBus | None = None) -> Any:
         """Return a wrapped client instance."""
-        return OpenAIInterceptor(client, event_bus=self._event_bus)
+        return cls(client, event_bus=event_bus)
 
 
 class OpenAIResponsesAdapter:
@@ -89,3 +104,6 @@ class OpenAIResponsesAdapter:
             return 0
         value = getattr(usage, field, None)
         return int(value or 0)
+
+
+register_adapter(OpenAIInterceptor)
