@@ -105,6 +105,7 @@ Every call your app makes now appears live. Arrow keys to navigate, `Enter` to i
 
 Everything flows through a single interception point and a normalized trace model, so new panels and providers are just new views over the same event stream.
 
+
 ```
    ┌─────────────┐      ┌──────────────┐      ┌────────────┐
    │   Your App  │─────▶│  Interceptor │─────▶│  Provider  │
