@@ -4,21 +4,97 @@ on:
   push:
   pull_request:
 
+permissions:
+  contents: read
+
 jobs:
   test:
-    runs-on: ubuntu-latest
+    runs-on: ${{ matrix.os }}
+    defaults:
+      run:
+        shell: bash
+    strategy:
+      fail-fast: true
+      matrix:
+        os: [ubuntu-latest, macos-latest, windows-latest]
+        python-version: ["3.10", "3.11", "3.12", "3.13"]
 
     steps:
       - uses: actions/checkout@v4
 
       - uses: actions/setup-python@v5
         with:
-          python-version: "3.11"
+          python-version: ${{ matrix.python-version }}
 
-      - run: python -m pip install -U pip build pytest
+      - name: Install tooling
+        run: python -m pip install --upgrade pip build pytest pytest-cov pytest-benchmark ruff mypy
 
-      - run: pip install -e .
+      - name: Install Glassbox
+        run: python -m pip install .
 
-      - run: pytest
+      - name: Ruff
+        run: >
+          ruff check
+          glassbox/tracing
+          glassbox/providers
+          glassbox/intercept
+          glassbox/events
+          glassbox/cli.py
+          tests/test_benchmarks.py
+          tests/test_cli.py
+          tests/test_demo_trace_source.py
+          tests/test_events_demo.py
+          tests/test_openai_interceptor.py
+          tests/test_openai_interceptor_edge_cases.py
+          tests/test_provider_registry.py
+          tests/test_readme_examples.py
+          tests/test_trace_builder.py
+          tests/test_trace_model.py
+          tests/test_trace_stress.py
+          tests/test_event_bus.py
 
-      - run: python -m build
+      - name: MyPy
+        run: mypy glassbox
+
+      - name: Pytest
+        run: pytest --cov=glassbox --cov-report=term-missing --cov-report=xml --benchmark-sort=name
+
+      - name: Build package
+        run: python -m build --wheel --no-isolation
+
+      - name: Verify wheel installation
+        run: |
+          python -m pip install --force-reinstall --no-deps dist/*.whl
+          python -c "import glassbox; print(glassbox.__version__)"
+
+  mutation:
+    runs-on: ubuntu-latest
+    needs: test
+    defaults:
+      run:
+        shell: bash
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install tooling
+        run: python -m pip install --upgrade pip build pytest mutmut
+
+      - name: Install Glassbox
+        run: python -m pip install .
+
+      - name: Run mutation testing
+        run: |
+          mutmut run
+          mutmut results --all | tee mutmut-results.txt
+          python - <<'PY'
+          from pathlib import Path
+
+          text = Path("mutmut-results.txt").read_text()
+          if "survived" in text.lower():
+              raise SystemExit(text)
+          PY

@@ -1,5 +1,5 @@
-"""Textual UI package for the Glassbox application."""
+"""Glassbox Textual user interface."""
 
-from .widgets import LiveTraceList, TraceDashboard
+from .app import GlassboxApp
 
-__all__ = ["LiveTraceList", "TraceDashboard"]
+__all__ = ["GlassboxApp"]

@@ -2,8 +2,9 @@
 
 from __future__ import annotations
 
+from collections.abc import Callable
 from threading import Lock
-from typing import Callable, TypeAlias
+from typing import TypeAlias
 
 from .trace import Trace
 

@@ -11,7 +11,9 @@ from rich.panel import Panel
 from rich.table import Table
 from rich.text import Text
 from textual.app import ComposeResult
+from textual.events import Key
 from textual.containers import Container, Vertical, VerticalScroll
+from textual.widget import Widget
 from textual.widgets import DataTable, Static
 
 from glassbox.demo import DemoEngine, ScriptedTraceSource
@@ -284,13 +286,28 @@ def _build_status_content(summary: TraceSummary) -> Text:
 class TraceFeed(DataTable):
     """Live-updating feed of trace events."""
 
-    def __init__(self, bus: EventBus | None = None, *, max_rows: int = 80, name: str | None = None) -> None:
-        super().__init__(name=name, zebra_stripes=False)
+    def __init__(
+        self,
+        bus: EventBus | None = None,
+        *,
+        max_rows: int = 80,
+        name: str | None = None,
+        id: str | None = None,
+        classes: str | None = None,
+        disabled: bool = False,
+    ) -> None:
+        super().__init__(
+            name=name,
+            id=id,
+            classes=classes,
+            disabled=disabled,
+            zebra_stripes=False,
+        )
         self._bus = bus or default_bus
         self._max_rows = max_rows
         self._subscribed = False
-        self._row_keys: list[object] = []
-        self._trace_by_key: dict[object, Trace] = {}
+        self._row_keys: list[str] = []
+        self._trace_by_key: dict[str, Trace] = {}
 
     def on_mount(self) -> None:
         self.cursor_type = "row"
@@ -303,9 +320,10 @@ class TraceFeed(DataTable):
             self._subscribed = True
 
     def _handle_trace(self, trace: Trace) -> None:
-        self.call_from_thread(self.append_trace, trace)
+        self.call_from_thread(self.append_trace, trace)  # type: ignore[attr-defined]
 
     def append_trace(self, trace: Trace, *, select_row: bool = True) -> None:
+        trace_key = str(trace.id)
         status_label, status_icon = _status_label(trace)
         provider = Text(trace.provider, style=_provider_style(trace.provider))
         model = Text(trace.model, style="bold white")
@@ -328,10 +346,10 @@ class TraceFeed(DataTable):
             tokens,
             cost,
             flags_text,
-            key=str(trace.id),
+            key=trace_key,
         )
-        self._row_keys.append(row_key)
-        self._trace_by_key[row_key] = trace
+        self._row_keys.append(trace_key)
+        self._trace_by_key[trace_key] = trace
 
         while len(self._row_keys) > self._max_rows:
             old_key = self._row_keys.pop(0)
@@ -358,14 +376,14 @@ class TraceFeed(DataTable):
         return self._trace_by_key.get(row_key)
 
     def on_data_table_row_highlighted(self, event: DataTable.RowHighlighted) -> None:  # type: ignore[override]
-        trace = self._trace_by_key.get(event.row_key)
+        trace = self._trace_by_key.get(str(event.row_key))
         if trace is None:
             return
         dashboard = self.app.query_one(TraceDashboard)
         dashboard.focus_trace(trace)
 
     def on_data_table_row_selected(self, event: DataTable.RowSelected) -> None:  # type: ignore[override]
-        trace = self._trace_by_key.get(event.row_key)
+        trace = self._trace_by_key.get(str(event.row_key))
         if trace is None:
             return
         dashboard = self.app.query_one(TraceDashboard)
@@ -375,8 +393,22 @@ class TraceFeed(DataTable):
 class TraceInspector(VerticalScroll):
     """Scrollable trace inspector with compact metadata and large detail panels."""
 
-    def __init__(self, analyzer: InsightAnalyzer | None = None, *, name: str | None = None) -> None:
-        super().__init__(name=name)
+    def __init__(
+        self,
+        analyzer: InsightAnalyzer | None = None,
+        *children: Widget,
+        name: str | None = None,
+        id: str | None = None,
+        classes: str | None = None,
+        disabled: bool = False,
+    ) -> None:
+        super().__init__(
+            *children,
+            name=name,
+            id=id,
+            classes=classes,
+            disabled=disabled,
+        )
         self._analyzer = analyzer or InsightAnalyzer()
         self._session_analyzer = SessionAnalyzer()
         self._content = Static("", classes="trace-inspector-content")
@@ -428,8 +460,15 @@ class TraceInspector(VerticalScroll):
 class TraceStatusBar(Static):
     """Bottom status strip for aggregate trace metrics."""
 
-    def __init__(self, *, name: str | None = None) -> None:
-        super().__init__("", name=name)
+    def __init__(
+        self,
+        *,
+        name: str | None = None,
+        id: str | None = None,
+        classes: str | None = None,
+        disabled: bool = False,
+    ) -> None:
+        super().__init__("", name=name, id=id, classes=classes, disabled=disabled)
 
     def update_summary(self, summary: TraceSummary) -> None:
         self.update(_build_status_content(summary))
@@ -441,11 +480,20 @@ class TraceDashboard(Vertical):
     def __init__(
         self,
         bus: EventBus | None = None,
-        *,
+        *children: Widget,
         demo_mode: bool = False,
         name: str | None = None,
+        id: str | None = None,
+        classes: str | None = None,
+        disabled: bool = False,
     ) -> None:
-        super().__init__(name=name, id="dashboard")
+        super().__init__(
+            *children,
+            name=name,
+            id=id or "dashboard",
+            classes=classes,
+            disabled=disabled,
+        )
         self._bus = bus or (EventBus() if demo_mode else default_bus)
         self._demo_mode = demo_mode
         self._demo_task: asyncio.Task[None] | None = None
@@ -489,7 +537,7 @@ class TraceDashboard(Vertical):
             raise
 
     def _handle_trace(self, trace: Trace) -> None:
-        self.call_from_thread(self._append_trace, trace)
+        self.call_from_thread(self._append_trace, trace)  # type: ignore[attr-defined]
 
     def _append_trace(self, trace: Trace) -> None:
         self._traces.append(trace)
@@ -561,7 +609,7 @@ class TraceDashboard(Vertical):
         else:
             self.show_session_summary()
 
-    def on_key(self, event) -> None:  # type: ignore[override]
+    def on_key(self, event: Key) -> None:  # type: ignore[override]
         if event.key == "tab":
             self.toggle_inspector_mode()
             event.stop()

@@ -17,7 +17,9 @@ class AzureOpenAIAdapter(PassThroughProviderAdapter):
     def supports(cls, client: Any) -> bool:
         if not hasattr(client, "responses"):
             return False
-        endpoint = str(getattr(client, "azure_endpoint", None) or getattr(client, "base_url", "") or "").lower()
+        endpoint = str(
+            getattr(client, "azure_endpoint", None) or getattr(client, "base_url", "") or ""
+        ).lower()
         return "azure" in endpoint or hasattr(client, "azure_endpoint")
 
 

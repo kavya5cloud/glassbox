@@ -1,5 +1,6 @@
 import random
 from uuid import uuid4
+
 from .models import LLMEvent
 
 MODELS = [
@@ -8,7 +9,7 @@ MODELS = [
     ("Google", "Gemini 2.5"),
 ]
 
-def random_event():
+def random_event() -> LLMEvent:
     provider, model = random.choice(MODELS)
 
     return LLMEvent(

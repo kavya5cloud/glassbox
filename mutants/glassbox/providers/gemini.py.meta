@@ -1,0 +1,48 @@
+{
+    "exit_code_by_key": {
+        "glassbox.providers.gemini.x\u01c1GeminiAdapter\u01c1supports__mutmut_1": 1,
+        "glassbox.providers.gemini.x\u01c1GeminiAdapter\u01c1supports__mutmut_2": 1,
+        "glassbox.providers.gemini.x\u01c1GeminiAdapter\u01c1supports__mutmut_3": 1,
+        "glassbox.providers.gemini.x\u01c1GeminiAdapter\u01c1supports__mutmut_4": 1,
+        "glassbox.providers.gemini.x\u01c1GeminiAdapter\u01c1supports__mutmut_5": 1,
+        "glassbox.providers.gemini.x\u01c1GeminiAdapter\u01c1supports__mutmut_6": 1,
+        "glassbox.providers.gemini.x\u01c1GeminiAdapter\u01c1supports__mutmut_7": 1,
+        "glassbox.providers.gemini.x\u01c1GeminiAdapter\u01c1supports__mutmut_8": 0,
+        "glassbox.providers.gemini.x\u01c1GeminiAdapter\u01c1supports__mutmut_9": 1,
+        "glassbox.providers.gemini.x\u01c1GeminiAdapter\u01c1supports__mutmut_10": 1,
+        "glassbox.providers.gemini.x\u01c1GeminiAdapter\u01c1supports__mutmut_11": 1,
+        "glassbox.providers.gemini.x\u01c1GeminiAdapter\u01c1supports__mutmut_12": 0,
+        "glassbox.providers.gemini.x\u01c1GeminiAdapter\u01c1supports__mutmut_13": 0
+    },
+    "type_check_error_by_key": {},
+    "durations_by_key": {
+        "glassbox.providers.gemini.x\u01c1GeminiAdapter\u01c1supports__mutmut_2": 0.487759,
+        "glassbox.providers.gemini.x\u01c1GeminiAdapter\u01c1supports__mutmut_1": 0.510624,
+        "glassbox.providers.gemini.x\u01c1GeminiAdapter\u01c1supports__mutmut_3": 0.512103,
+        "glassbox.providers.gemini.x\u01c1GeminiAdapter\u01c1supports__mutmut_5": 0.449869,
+        "glassbox.providers.gemini.x\u01c1GeminiAdapter\u01c1supports__mutmut_4": 0.479712,
+        "glassbox.providers.gemini.x\u01c1GeminiAdapter\u01c1supports__mutmut_6": 0.434845,
+        "glassbox.providers.gemini.x\u01c1GeminiAdapter\u01c1supports__mutmut_7": 0.409325,
+        "glassbox.providers.gemini.x\u01c1GeminiAdapter\u01c1supports__mutmut_8": 0.422413,
+        "glassbox.providers.gemini.x\u01c1GeminiAdapter\u01c1supports__mutmut_9": 0.511993,
+        "glassbox.providers.gemini.x\u01c1GeminiAdapter\u01c1supports__mutmut_10": 0.513989,
+        "glassbox.providers.gemini.x\u01c1GeminiAdapter\u01c1supports__mutmut_12": 0.458443,
+        "glassbox.providers.gemini.x\u01c1GeminiAdapter\u01c1supports__mutmut_13": 0.461906,
+        "glassbox.providers.gemini.x\u01c1GeminiAdapter\u01c1supports__mutmut_11": 0.48175
+    },
+    "estimated_durations_by_key": {
+        "glassbox.providers.gemini.x\u01c1GeminiAdapter\u01c1supports__mutmut_1": 0.001113457081373781,
+        "glassbox.providers.gemini.x\u01c1GeminiAdapter\u01c1supports__mutmut_2": 0.001113457081373781,
+        "glassbox.providers.gemini.x\u01c1GeminiAdapter\u01c1supports__mutmut_3": 0.001113457081373781,
+        "glassbox.providers.gemini.x\u01c1GeminiAdapter\u01c1supports__mutmut_4": 0.001113457081373781,
+        "glassbox.providers.gemini.x\u01c1GeminiAdapter\u01c1supports__mutmut_5": 0.001113457081373781,
+        "glassbox.providers.gemini.x\u01c1GeminiAdapter\u01c1supports__mutmut_6": 0.001113457081373781,
+        "glassbox.providers.gemini.x\u01c1GeminiAdapter\u01c1supports__mutmut_7": 0.001113457081373781,
+        "glassbox.providers.gemini.x\u01c1GeminiAdapter\u01c1supports__mutmut_8": 0.001113457081373781,
+        "glassbox.providers.gemini.x\u01c1GeminiAdapter\u01c1supports__mutmut_9": 0.001113457081373781,
+        "glassbox.providers.gemini.x\u01c1GeminiAdapter\u01c1supports__mutmut_10": 0.001113457081373781,
+        "glassbox.providers.gemini.x\u01c1GeminiAdapter\u01c1supports__mutmut_11": 0.001113457081373781,
+        "glassbox.providers.gemini.x\u01c1GeminiAdapter\u01c1supports__mutmut_12": 0.001113457081373781,
+        "glassbox.providers.gemini.x\u01c1GeminiAdapter\u01c1supports__mutmut_13": 0.001113457081373781
+    }
+}

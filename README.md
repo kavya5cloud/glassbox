@@ -20,11 +20,11 @@ Wrap your client in one line and watch every LLM call your app makes stream into
 [![License](https://img.shields.io/badge/license-Apache%202.0-blue)](LICENSE)
 
 ```bash
-pip install glassboxcli
-glassboxcli demo   # try it now 
+pip install glassbox
+glassbox demo   # try it now
 ```
 
-> The package is published as **glassboxcli** on PyPI, but the CLI command and Python package are both named **glassbox**.
+> The package is published as **glassbox** on PyPI, and the CLI command and Python package are both named **glassbox**.
 
 ---
 
@@ -60,7 +60,7 @@ Glassbox makes every AI call visible — in real time, in your terminal.
 ## Installation
 
 ```bash
-pip install glassboxcli
+pip install glassbox
 ```
 
 Requires Python 3.9+.
@@ -80,21 +80,21 @@ This replays synthetic traffic so you can explore the UI before wiring in your o
 **2. Instrument your app** — wrap your client once:
 
 ```python
-from glassbox import trace
+from glassbox.intercept import intercept
 from openai import OpenAI
 
-client = trace(OpenAI())
+client = intercept(OpenAI())
 
-client.chat.completions.create(
-    model="gpt-4o",
-    messages=[{"role": "user", "content": "Explain black holes in one line."}],
+client.responses.create(
+    model="gpt-4.1",
+    input="Explain black holes in one line.",
 )
 ```
 
 **3. Open the terminal UI:**
 
 ```bash
-glassbox ui
+glassbox watch
 ```
 
 Every call your app makes now appears live. Arrow keys to navigate, `Enter` to inspect, `q` to quit.

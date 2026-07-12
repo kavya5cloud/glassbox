@@ -1,0 +1,30 @@
+{
+    "exit_code_by_key": {
+        "glassbox.tracing.bus.x\u01c1EventBus\u01c1__init____mutmut_1": 1,
+        "glassbox.tracing.bus.x\u01c1EventBus\u01c1__init____mutmut_2": 1,
+        "glassbox.tracing.bus.x\u01c1EventBus\u01c1subscribe__mutmut_1": 1,
+        "glassbox.tracing.bus.x\u01c1EventBus\u01c1subscribe__mutmut_2": 1,
+        "glassbox.tracing.bus.x\u01c1EventBus\u01c1publish__mutmut_1": 1,
+        "glassbox.tracing.bus.x\u01c1EventBus\u01c1publish__mutmut_2": 1,
+        "glassbox.tracing.bus.x\u01c1EventBus\u01c1publish__mutmut_3": 1
+    },
+    "type_check_error_by_key": {},
+    "durations_by_key": {
+        "glassbox.tracing.bus.x\u01c1EventBus\u01c1subscribe__mutmut_2": 0.238313,
+        "glassbox.tracing.bus.x\u01c1EventBus\u01c1subscribe__mutmut_1": 0.244835,
+        "glassbox.tracing.bus.x\u01c1EventBus\u01c1publish__mutmut_1": 0.247482,
+        "glassbox.tracing.bus.x\u01c1EventBus\u01c1publish__mutmut_2": 0.219562,
+        "glassbox.tracing.bus.x\u01c1EventBus\u01c1publish__mutmut_3": 0.226645,
+        "glassbox.tracing.bus.x\u01c1EventBus\u01c1__init____mutmut_1": 0.224564,
+        "glassbox.tracing.bus.x\u01c1EventBus\u01c1__init____mutmut_2": 0.166172
+    },
+    "estimated_durations_by_key": {
+        "glassbox.tracing.bus.x\u01c1EventBus\u01c1subscribe__mutmut_1": 0.84488746029092,
+        "glassbox.tracing.bus.x\u01c1EventBus\u01c1subscribe__mutmut_2": 0.84488746029092,
+        "glassbox.tracing.bus.x\u01c1EventBus\u01c1publish__mutmut_1": 2.102073918329552,
+        "glassbox.tracing.bus.x\u01c1EventBus\u01c1publish__mutmut_2": 2.102073918329552,
+        "glassbox.tracing.bus.x\u01c1EventBus\u01c1publish__mutmut_3": 2.102073918329552,
+        "glassbox.tracing.bus.x\u01c1EventBus\u01c1__init____mutmut_1": 2.750430084182881,
+        "glassbox.tracing.bus.x\u01c1EventBus\u01c1__init____mutmut_2": 2.750430084182881
+    }
+}

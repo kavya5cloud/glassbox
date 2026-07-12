@@ -1,0 +1,27 @@
+{
+    "exit_code_by_key": {
+        "glassbox.providers.anthropic.x\u01c1AnthropicAdapter\u01c1supports__mutmut_1": 1,
+        "glassbox.providers.anthropic.x\u01c1AnthropicAdapter\u01c1supports__mutmut_2": 1,
+        "glassbox.providers.anthropic.x\u01c1AnthropicAdapter\u01c1supports__mutmut_3": 1,
+        "glassbox.providers.anthropic.x\u01c1AnthropicAdapter\u01c1supports__mutmut_4": 1,
+        "glassbox.providers.anthropic.x\u01c1AnthropicAdapter\u01c1supports__mutmut_5": 1,
+        "glassbox.providers.anthropic.x\u01c1AnthropicAdapter\u01c1supports__mutmut_6": 1
+    },
+    "type_check_error_by_key": {},
+    "durations_by_key": {
+        "glassbox.providers.anthropic.x\u01c1AnthropicAdapter\u01c1supports__mutmut_1": 0.277301,
+        "glassbox.providers.anthropic.x\u01c1AnthropicAdapter\u01c1supports__mutmut_2": 0.27722,
+        "glassbox.providers.anthropic.x\u01c1AnthropicAdapter\u01c1supports__mutmut_3": 0.269307,
+        "glassbox.providers.anthropic.x\u01c1AnthropicAdapter\u01c1supports__mutmut_6": 0.25241,
+        "glassbox.providers.anthropic.x\u01c1AnthropicAdapter\u01c1supports__mutmut_4": 0.273468,
+        "glassbox.providers.anthropic.x\u01c1AnthropicAdapter\u01c1supports__mutmut_5": 0.273472
+    },
+    "estimated_durations_by_key": {
+        "glassbox.providers.anthropic.x\u01c1AnthropicAdapter\u01c1supports__mutmut_1": 0.001113457081373781,
+        "glassbox.providers.anthropic.x\u01c1AnthropicAdapter\u01c1supports__mutmut_2": 0.001113457081373781,
+        "glassbox.providers.anthropic.x\u01c1AnthropicAdapter\u01c1supports__mutmut_3": 0.001113457081373781,
+        "glassbox.providers.anthropic.x\u01c1AnthropicAdapter\u01c1supports__mutmut_4": 0.001113457081373781,
+        "glassbox.providers.anthropic.x\u01c1AnthropicAdapter\u01c1supports__mutmut_5": 0.001113457081373781,
+        "glassbox.providers.anthropic.x\u01c1AnthropicAdapter\u01c1supports__mutmut_6": 0.001113457081373781
+    }
+}

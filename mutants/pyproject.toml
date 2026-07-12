@@ -1,0 +1,75 @@
+[build-system]
+requires = ["setuptools<77", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "glassboxcli"
+version = "0.2.0"
+description = "DevTools for LLM Applications"
+readme = "README.md"
+requires-python = ">=3.11"
+license = { text = "MIT"}
+dependencies = [
+    "textual>=0.70.0",
+    "rich>=13.7.0",
+    "typer>=0.12.3",
+    "pydantic>=2.7.0",
+]
+
+[project.scripts]
+glassbox = "glassbox.cli:app"
+
+[tool.setuptools]
+include-package-data = true
+packages = ["glassbox", "glassbox.demo", "glassbox.events", "glassbox.insights", "glassbox.intercept", "glassbox.providers", "glassbox.storage", "glassbox.tracing", "glassbox.tui"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+markers = [
+    "benchmark: performance benchmarks powered by pytest-benchmark",
+]
+
+[tool.mypy]
+python_version = "3.10"
+warn_return_any = true
+warn_unused_configs = true
+disallow_untyped_defs = true
+no_implicit_optional = true
+show_error_codes = true
+pretty = true
+files = ["glassbox"]
+exclude = [
+    '^tests/',
+]
+
+[tool.ruff]
+target-version = "py310"
+line-length = 100
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B"]
+ignore = ["B008"]
+
+[tool.mutmut]
+paths_to_mutate = ["glassbox"]
+tests_dir = ["tests"]
+do_not_mutate = [
+    "glassbox/demo/*",
+    "glassbox/insights/*",
+    "glassbox/tui/*",
+    "glassbox/storage/*",
+    "glassbox/core/*",
+    "glassbox/providers/registry.py",
+    "glassbox/intercept/openai.py",
+    "glassbox/providers/_passthrough.py",
+    "glassbox/providers/__init__.py",
+    "glassbox/intercept/base.py",
+    "glassbox/intercept/anthropic.py",
+    "glassbox/providers/base.py",
+]
+
+[project.urls]
+Homepage = "https://github.com/kavya5cloud/glassbox"
+Repository = "https://github.com/kavya5cloud/glassbox"
+Issues = "https://github.com/kavya5cloud/glassbox/issues"
+Documentation = "https://github.com/kavya5cloud/glassbox#readme"
