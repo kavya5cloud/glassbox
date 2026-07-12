@@ -143,24 +143,27 @@ glassbox/
 
 ## Roadmap
 
-**Available now**
-- [x] Live trace feed
-- [x] Trace inspector
-- [x] OpenAI SDK interception
-- [x] Demo mode
+Today
 
-**Next**
-- [ ] SQLite recording and replay
-- [ ] Streaming response support
-- [ ] Anthropic and Gemini providers
-- [ ] Pricing engine — cost per call, projected spend
-- [ ] Prompt diff — compare two runs side by side
-- [ ] Export (JSON / HAR-style)
+✅ Process Capture
 
-**Later**
-- [ ] Plugin SDK
-- [ ] VS Code extension
+✅ HTTP Capture
 
+✅ Immutable Observations
+
+✅ Glassbox IR
+
+Next
+
+⬜ Dataset Engine
+
+⬜ Evaluation Engine
+
+⬜ Diff Engine
+
+⬜ Replay
+
+⬜ Deployment Recommendations
 ---
 
 ## Philosophy
