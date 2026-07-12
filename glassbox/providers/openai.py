@@ -5,10 +5,10 @@ from __future__ import annotations
 from datetime import datetime, timezone
 from typing import Any
 
+from glassbox.providers.manager import register_adapter
 from glassbox.tracing import EventBus
 from glassbox.tracing.builder import TraceBuilder
 from glassbox.tracing.bus import default_bus
-from glassbox.providers.manager import register_adapter
 
 
 class OpenAIInterceptor:
@@ -53,9 +53,12 @@ class OpenAIResponsesAdapter:
         request_text = self._extract_request_text(kwargs)
         response = self._client.create(*args, **kwargs)
         ended_at = datetime.now(timezone.utc)
+        model = kwargs.get("model") or getattr(response, "model", "unknown")
+        if not isinstance(model, str):
+            model = "unknown"
         trace = self._builder.build(
             provider="OpenAI",
-            model=kwargs.get("model") or getattr(response, "model", "unknown"),
+            model=model,
             prompt=request_text,
             response_text=self._extract_response_text(response),
             input_tokens=self._extract_usage_value(response, "input_tokens"),

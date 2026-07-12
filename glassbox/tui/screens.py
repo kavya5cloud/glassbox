@@ -4,6 +4,7 @@ from __future__ import annotations
 
 from textual.app import ComposeResult
 from textual.containers import Container
+from textual.events import Key
 from textual.screen import Screen
 from textual.widgets import Static
 
@@ -13,8 +14,15 @@ from glassbox.tracing import Trace
 class TraceInspectorScreen(Screen[None]):
     """Display the full contents of a single trace."""
 
-    def __init__(self, trace: Trace, *, name: str | None = None) -> None:
-        super().__init__(name=name)
+    def __init__(
+        self,
+        trace: Trace,
+        *,
+        name: str | None = None,
+        id: str | None = None,
+        classes: str | None = None,
+    ) -> None:
+        super().__init__(name=name, id=id, classes=classes)
         self.trace = trace
         self._details = Static("", classes="trace-details")
 
@@ -28,7 +36,7 @@ class TraceInspectorScreen(Screen[None]):
     def on_mount(self) -> None:
         self._details.update(self._format_trace())
 
-    def on_key(self, event) -> None:  # type: ignore[override]
+    def on_key(self, event: Key) -> None:  # type: ignore[override]
         if event.key == "escape":
             self.app.pop_screen()
             event.stop()

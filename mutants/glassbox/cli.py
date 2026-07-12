@@ -8,21 +8,24 @@ app = typer.Typer(
 )
 
 
+from mutmut.mutation.trampoline import wrap_in_trampoline as _mutmut_mutated, MutantDict
+
+
 @app.callback()
-def main(ctx: typer.Context):
+def main(ctx: typer.Context) -> None:
     """Launch Glassbox."""
     if ctx.invoked_subcommand is None:
         GlassboxApp().run()
 
 
 @app.command()
-def watch():
+def watch() -> None:
     """Launch Glassbox."""
     GlassboxApp().run()
 
 
 @app.command()
-def demo():
+def demo() -> None:
     """Run the deterministic scripted demo trace flow."""
     GlassboxApp(demo_mode=True).run()
 

@@ -1,0 +1,310 @@
+{
+    "tests_by_mangled_function_name": {
+        "glassbox.tracing.bus.x\u01c1EventBus\u01c1publish": [
+            "tests/test_demo_engine.py::test_demo_engine_emits_deterministic_trace_sequence",
+            "tests/test_openai_interceptor.py::test_intercept_publishes_trace",
+            "tests/test_event_bus.py::test_event_bus_subscribes_once_and_publishes_in_order",
+            "tests/test_openai_interceptor_edge_cases.py::test_openai_interception_handles_responses_without_usage_metadata",
+            "tests/test_benchmarks.py::test_benchmark_provider_interception",
+            "tests/test_openai_interceptor_edge_cases.py::test_openai_interception_handles_empty_prompt_and_unknown_model",
+            "tests/test_readme_examples.py::test_readme_quick_start_example_uses_public_intercept_api",
+            "tests/test_trace_builder.py::test_trace_builder_computes_latency_and_publishes_trace",
+            "tests/test_benchmarks.py::test_benchmark_event_publishing",
+            "tests/test_openai_interceptor.py::test_intercept_extracts_text_from_structured_inputs_and_keeps_unicode",
+            "tests/test_openai_interceptor_edge_cases.py::test_openai_interception_falls_back_when_model_is_not_a_string",
+            "tests/test_trace_stress.py::test_many_traces_can_be_built_and_published_concurrently"
+        ],
+        "glassbox.providers.openai.x\u01c1OpenAIInterceptor\u01c1__init__": [
+            "tests/test_openai_interceptor.py::test_intercept_publishes_trace",
+            "tests/test_openai_interceptor_edge_cases.py::test_openai_interception_handles_responses_without_usage_metadata",
+            "tests/test_benchmarks.py::test_benchmark_provider_interception",
+            "tests/test_openai_interceptor_edge_cases.py::test_openai_interception_handles_empty_prompt_and_unknown_model",
+            "tests/test_readme_examples.py::test_readme_quick_start_example_uses_public_intercept_api",
+            "tests/test_openai_interceptor.py::test_intercept_extracts_text_from_structured_inputs_and_keeps_unicode",
+            "tests/test_openai_interceptor_edge_cases.py::test_openai_interception_falls_back_when_model_is_not_a_string"
+        ],
+        "glassbox.intercept.x_intercept": [
+            "tests/test_openai_interceptor.py::test_intercept_publishes_trace",
+            "tests/test_openai_interceptor_edge_cases.py::test_openai_interception_handles_responses_without_usage_metadata",
+            "tests/test_benchmarks.py::test_benchmark_provider_interception",
+            "tests/test_openai_interceptor_edge_cases.py::test_openai_interception_handles_empty_prompt_and_unknown_model",
+            "tests/test_readme_examples.py::test_readme_quick_start_example_uses_public_intercept_api",
+            "tests/test_openai_interceptor.py::test_intercept_extracts_text_from_structured_inputs_and_keeps_unicode",
+            "tests/test_openai_interceptor_edge_cases.py::test_openai_interception_falls_back_when_model_is_not_a_string",
+            "tests/test_openai_interceptor.py::test_intercept_returns_unknown_clients_unchanged"
+        ],
+        "glassbox.providers.openai.x\u01c1OpenAIResponsesAdapter\u01c1__init__": [
+            "tests/test_openai_interceptor.py::test_intercept_publishes_trace",
+            "tests/test_openai_interceptor_edge_cases.py::test_openai_interception_handles_responses_without_usage_metadata",
+            "tests/test_benchmarks.py::test_benchmark_provider_interception",
+            "tests/test_openai_interceptor_edge_cases.py::test_openai_interception_handles_empty_prompt_and_unknown_model",
+            "tests/test_readme_examples.py::test_readme_quick_start_example_uses_public_intercept_api",
+            "tests/test_openai_interceptor.py::test_intercept_extracts_text_from_structured_inputs_and_keeps_unicode",
+            "tests/test_openai_interceptor_edge_cases.py::test_openai_interception_falls_back_when_model_is_not_a_string"
+        ],
+        "glassbox.providers.manager.x_get_adapter_for_client": [
+            "tests/test_openai_interceptor.py::test_intercept_publishes_trace",
+            "tests/test_openai_interceptor_edge_cases.py::test_openai_interception_handles_responses_without_usage_metadata",
+            "tests/test_benchmarks.py::test_benchmark_provider_interception",
+            "tests/test_openai_interceptor_edge_cases.py::test_openai_interception_handles_empty_prompt_and_unknown_model",
+            "tests/test_readme_examples.py::test_readme_quick_start_example_uses_public_intercept_api",
+            "tests/test_openai_interceptor.py::test_intercept_extracts_text_from_structured_inputs_and_keeps_unicode",
+            "tests/test_openai_interceptor_edge_cases.py::test_openai_interception_falls_back_when_model_is_not_a_string",
+            "tests/test_provider_registry.py::test_provider_registry_selects_matching_adapter_for_each_client_shape",
+            "tests/test_openai_interceptor.py::test_intercept_returns_unknown_clients_unchanged"
+        ],
+        "glassbox.tracing.builder.x\u01c1TraceBuilder\u01c1build": [
+            "tests/test_openai_interceptor.py::test_intercept_publishes_trace",
+            "tests/test_openai_interceptor_edge_cases.py::test_openai_interception_handles_responses_without_usage_metadata",
+            "tests/test_benchmarks.py::test_benchmark_provider_interception",
+            "tests/test_openai_interceptor_edge_cases.py::test_openai_interception_handles_empty_prompt_and_unknown_model",
+            "tests/test_readme_examples.py::test_readme_quick_start_example_uses_public_intercept_api",
+            "tests/test_trace_builder.py::test_trace_builder_computes_latency_and_publishes_trace",
+            "tests/test_benchmarks.py::test_benchmark_trace_creation",
+            "tests/test_openai_interceptor.py::test_intercept_extracts_text_from_structured_inputs_and_keeps_unicode",
+            "tests/test_openai_interceptor_edge_cases.py::test_openai_interception_falls_back_when_model_is_not_a_string",
+            "tests/test_trace_stress.py::test_many_traces_can_be_built_and_published_concurrently",
+            "tests/test_trace_builder.py::test_trace_builder_respects_explicit_latency_and_cost"
+        ],
+        "glassbox.providers.manager.x__discover_builtin_adapters": [
+            "tests/test_openai_interceptor.py::test_intercept_publishes_trace",
+            "tests/test_openai_interceptor_edge_cases.py::test_openai_interception_handles_responses_without_usage_metadata",
+            "tests/test_benchmarks.py::test_benchmark_provider_interception",
+            "tests/test_openai_interceptor_edge_cases.py::test_openai_interception_handles_empty_prompt_and_unknown_model",
+            "tests/test_readme_examples.py::test_readme_quick_start_example_uses_public_intercept_api",
+            "tests/test_provider_registry.py::test_provider_registry_discovers_builtin_adapters",
+            "tests/test_openai_interceptor.py::test_intercept_extracts_text_from_structured_inputs_and_keeps_unicode",
+            "tests/test_openai_interceptor_edge_cases.py::test_openai_interception_falls_back_when_model_is_not_a_string",
+            "tests/test_provider_registry.py::test_provider_registry_selects_matching_adapter_for_each_client_shape",
+            "tests/test_openai_interceptor.py::test_intercept_returns_unknown_clients_unchanged"
+        ],
+        "glassbox.providers.openai.x\u01c1OpenAIResponsesAdapter\u01c1create": [
+            "tests/test_openai_interceptor.py::test_intercept_publishes_trace",
+            "tests/test_openai_interceptor_edge_cases.py::test_openai_interception_handles_responses_without_usage_metadata",
+            "tests/test_benchmarks.py::test_benchmark_provider_interception",
+            "tests/test_openai_interceptor_edge_cases.py::test_openai_interception_handles_empty_prompt_and_unknown_model",
+            "tests/test_readme_examples.py::test_readme_quick_start_example_uses_public_intercept_api",
+            "tests/test_openai_interceptor.py::test_intercept_extracts_text_from_structured_inputs_and_keeps_unicode",
+            "tests/test_openai_interceptor_edge_cases.py::test_openai_interception_falls_back_when_model_is_not_a_string"
+        ],
+        "glassbox.providers.openai.x\u01c1OpenAIResponsesAdapter\u01c1_extract_response_text": [
+            "tests/test_openai_interceptor.py::test_intercept_publishes_trace",
+            "tests/test_openai_interceptor_edge_cases.py::test_openai_interception_handles_responses_without_usage_metadata",
+            "tests/test_benchmarks.py::test_benchmark_provider_interception",
+            "tests/test_openai_interceptor_edge_cases.py::test_openai_interception_handles_empty_prompt_and_unknown_model",
+            "tests/test_readme_examples.py::test_readme_quick_start_example_uses_public_intercept_api",
+            "tests/test_openai_interceptor.py::test_intercept_extracts_text_from_structured_inputs_and_keeps_unicode",
+            "tests/test_openai_interceptor_edge_cases.py::test_openai_interception_falls_back_when_model_is_not_a_string"
+        ],
+        "glassbox.tracing.bus.x\u01c1EventBus\u01c1__init__": [
+            "tests/test_demo_engine.py::test_demo_engine_emits_deterministic_trace_sequence",
+            "tests/test_event_bus.py::test_event_bus_subscribes_once_and_publishes_in_order",
+            "tests/test_openai_interceptor.py::test_intercept_publishes_trace",
+            "tests/test_openai_interceptor_edge_cases.py::test_openai_interception_handles_responses_without_usage_metadata",
+            "tests/test_benchmarks.py::test_benchmark_provider_interception",
+            "tests/test_openai_interceptor_edge_cases.py::test_openai_interception_handles_empty_prompt_and_unknown_model",
+            "tests/test_demo_trace_source.py::test_demo_trace_source_generate_trace_uses_sample_payload",
+            "tests/test_trace_builder.py::test_trace_builder_computes_latency_and_publishes_trace",
+            "tests/test_demo_trace_source.py::test_demo_trace_source_run_publishes_until_stopped",
+            "tests/test_benchmarks.py::test_benchmark_event_publishing",
+            "tests/test_openai_interceptor.py::test_intercept_extracts_text_from_structured_inputs_and_keeps_unicode",
+            "tests/test_openai_interceptor_edge_cases.py::test_openai_interception_falls_back_when_model_is_not_a_string",
+            "tests/test_trace_stress.py::test_many_traces_can_be_built_and_published_concurrently",
+            "tests/test_benchmarks.py::test_benchmark_generator_throughput",
+            "tests/test_demo_trace_source.py::test_demo_trace_source_samples_known_payloads",
+            "tests/test_demo_trace_source.py::test_demo_trace_source_start_and_stop_manage_background_thread"
+        ],
+        "glassbox.tracing.builder.x\u01c1TraceBuilder\u01c1publish": [
+            "tests/test_openai_interceptor.py::test_intercept_publishes_trace",
+            "tests/test_openai_interceptor_edge_cases.py::test_openai_interception_handles_responses_without_usage_metadata",
+            "tests/test_benchmarks.py::test_benchmark_provider_interception",
+            "tests/test_openai_interceptor_edge_cases.py::test_openai_interception_handles_empty_prompt_and_unknown_model",
+            "tests/test_readme_examples.py::test_readme_quick_start_example_uses_public_intercept_api",
+            "tests/test_trace_builder.py::test_trace_builder_computes_latency_and_publishes_trace",
+            "tests/test_openai_interceptor.py::test_intercept_extracts_text_from_structured_inputs_and_keeps_unicode",
+            "tests/test_openai_interceptor_edge_cases.py::test_openai_interception_falls_back_when_model_is_not_a_string",
+            "tests/test_trace_stress.py::test_many_traces_can_be_built_and_published_concurrently"
+        ],
+        "glassbox.providers.openai.x\u01c1OpenAIInterceptor\u01c1supports": [
+            "tests/test_openai_interceptor.py::test_intercept_publishes_trace",
+            "tests/test_openai_interceptor_edge_cases.py::test_openai_interception_handles_responses_without_usage_metadata",
+            "tests/test_benchmarks.py::test_benchmark_provider_interception",
+            "tests/test_openai_interceptor_edge_cases.py::test_openai_interception_handles_empty_prompt_and_unknown_model",
+            "tests/test_readme_examples.py::test_readme_quick_start_example_uses_public_intercept_api",
+            "tests/test_openai_interceptor.py::test_intercept_extracts_text_from_structured_inputs_and_keeps_unicode",
+            "tests/test_openai_interceptor_edge_cases.py::test_openai_supports_rejects_azure_clients",
+            "tests/test_openai_interceptor_edge_cases.py::test_openai_interception_falls_back_when_model_is_not_a_string",
+            "tests/test_provider_registry.py::test_provider_registry_selects_matching_adapter_for_each_client_shape",
+            "tests/test_openai_interceptor.py::test_intercept_returns_unknown_clients_unchanged"
+        ],
+        "glassbox.tracing.builder.x\u01c1TraceBuilder\u01c1__init__": [
+            "tests/test_openai_interceptor.py::test_intercept_publishes_trace",
+            "tests/test_openai_interceptor_edge_cases.py::test_openai_interception_handles_responses_without_usage_metadata",
+            "tests/test_benchmarks.py::test_benchmark_provider_interception",
+            "tests/test_openai_interceptor_edge_cases.py::test_openai_interception_handles_empty_prompt_and_unknown_model",
+            "tests/test_readme_examples.py::test_readme_quick_start_example_uses_public_intercept_api",
+            "tests/test_trace_builder.py::test_trace_builder_computes_latency_and_publishes_trace",
+            "tests/test_benchmarks.py::test_benchmark_trace_creation",
+            "tests/test_openai_interceptor.py::test_intercept_extracts_text_from_structured_inputs_and_keeps_unicode",
+            "tests/test_openai_interceptor_edge_cases.py::test_openai_interception_falls_back_when_model_is_not_a_string",
+            "tests/test_trace_stress.py::test_many_traces_can_be_built_and_published_concurrently",
+            "tests/test_trace_builder.py::test_trace_builder_respects_explicit_latency_and_cost"
+        ],
+        "glassbox.providers.openai.x\u01c1OpenAIInterceptor\u01c1wrap": [
+            "tests/test_openai_interceptor.py::test_intercept_publishes_trace",
+            "tests/test_openai_interceptor_edge_cases.py::test_openai_interception_handles_responses_without_usage_metadata",
+            "tests/test_benchmarks.py::test_benchmark_provider_interception",
+            "tests/test_openai_interceptor_edge_cases.py::test_openai_interception_handles_empty_prompt_and_unknown_model",
+            "tests/test_readme_examples.py::test_readme_quick_start_example_uses_public_intercept_api",
+            "tests/test_openai_interceptor.py::test_intercept_extracts_text_from_structured_inputs_and_keeps_unicode",
+            "tests/test_openai_interceptor_edge_cases.py::test_openai_interception_falls_back_when_model_is_not_a_string"
+        ],
+        "glassbox.providers.openai.x\u01c1OpenAIResponsesAdapter\u01c1_extract_request_text": [
+            "tests/test_openai_interceptor.py::test_intercept_publishes_trace",
+            "tests/test_openai_interceptor_edge_cases.py::test_openai_interception_handles_responses_without_usage_metadata",
+            "tests/test_benchmarks.py::test_benchmark_provider_interception",
+            "tests/test_openai_interceptor_edge_cases.py::test_openai_interception_handles_empty_prompt_and_unknown_model",
+            "tests/test_readme_examples.py::test_readme_quick_start_example_uses_public_intercept_api",
+            "tests/test_openai_interceptor.py::test_intercept_extracts_text_from_structured_inputs_and_keeps_unicode",
+            "tests/test_openai_interceptor_edge_cases.py::test_openai_interception_falls_back_when_model_is_not_a_string"
+        ],
+        "glassbox.providers.manager.x_register_adapter": [
+            "tests/test_benchmarks.py::test_benchmark_provider_interception"
+        ],
+        "glassbox.providers.manager.x_available_adapters": [
+            "tests/test_openai_interceptor.py::test_intercept_publishes_trace",
+            "tests/test_openai_interceptor_edge_cases.py::test_openai_interception_handles_responses_without_usage_metadata",
+            "tests/test_benchmarks.py::test_benchmark_provider_interception",
+            "tests/test_openai_interceptor_edge_cases.py::test_openai_interception_handles_empty_prompt_and_unknown_model",
+            "tests/test_readme_examples.py::test_readme_quick_start_example_uses_public_intercept_api",
+            "tests/test_provider_registry.py::test_provider_registry_discovers_builtin_adapters",
+            "tests/test_openai_interceptor.py::test_intercept_extracts_text_from_structured_inputs_and_keeps_unicode",
+            "tests/test_openai_interceptor_edge_cases.py::test_openai_interception_falls_back_when_model_is_not_a_string",
+            "tests/test_provider_registry.py::test_provider_registry_selects_matching_adapter_for_each_client_shape",
+            "tests/test_openai_interceptor.py::test_intercept_returns_unknown_clients_unchanged"
+        ],
+        "glassbox.providers.openai.x\u01c1OpenAIResponsesAdapter\u01c1_extract_usage_value": [
+            "tests/test_openai_interceptor.py::test_intercept_publishes_trace",
+            "tests/test_openai_interceptor_edge_cases.py::test_openai_interception_handles_responses_without_usage_metadata",
+            "tests/test_benchmarks.py::test_benchmark_provider_interception",
+            "tests/test_openai_interceptor_edge_cases.py::test_openai_interception_handles_empty_prompt_and_unknown_model",
+            "tests/test_readme_examples.py::test_readme_quick_start_example_uses_public_intercept_api",
+            "tests/test_openai_interceptor.py::test_intercept_extracts_text_from_structured_inputs_and_keeps_unicode",
+            "tests/test_openai_interceptor_edge_cases.py::test_openai_interception_falls_back_when_model_is_not_a_string"
+        ],
+        "glassbox.tracing.bus.x\u01c1EventBus\u01c1subscribe": [
+            "tests/test_event_bus.py::test_event_bus_subscribes_once_and_publishes_in_order",
+            "tests/test_openai_interceptor.py::test_intercept_publishes_trace",
+            "tests/test_openai_interceptor_edge_cases.py::test_openai_interception_handles_responses_without_usage_metadata",
+            "tests/test_openai_interceptor_edge_cases.py::test_openai_interception_handles_empty_prompt_and_unknown_model",
+            "tests/test_trace_builder.py::test_trace_builder_computes_latency_and_publishes_trace",
+            "tests/test_benchmarks.py::test_benchmark_event_publishing",
+            "tests/test_openai_interceptor.py::test_intercept_extracts_text_from_structured_inputs_and_keeps_unicode",
+            "tests/test_openai_interceptor_edge_cases.py::test_openai_interception_falls_back_when_model_is_not_a_string",
+            "tests/test_trace_stress.py::test_many_traces_can_be_built_and_published_concurrently"
+        ],
+        "glassbox.tracing.trace.x\u01c1Trace\u01c1to_dict": [
+            "tests/test_trace_model.py::test_trace_preserves_unicode_and_emojis_through_serialization",
+            "tests/test_trace_model.py::test_trace_defaults_are_stable_and_serializable",
+            "tests/test_benchmarks.py::test_benchmark_serialization"
+        ],
+        "glassbox.tracing.generator.x\u01c1DemoTraceSource\u01c1__init__": [
+            "tests/test_demo_trace_source.py::test_demo_trace_source_generate_trace_uses_sample_payload",
+            "tests/test_demo_trace_source.py::test_demo_trace_source_run_publishes_until_stopped",
+            "tests/test_benchmarks.py::test_benchmark_generator_throughput",
+            "tests/test_demo_trace_source.py::test_demo_trace_source_samples_known_payloads",
+            "tests/test_demo_trace_source.py::test_demo_trace_source_start_and_stop_manage_background_thread"
+        ],
+        "glassbox.tracing.generator.x\u01c1DemoTraceSource\u01c1_generate_trace": [
+            "tests/test_demo_trace_source.py::test_demo_trace_source_generate_trace_uses_sample_payload",
+            "tests/test_benchmarks.py::test_benchmark_generator_throughput",
+            "tests/test_demo_trace_source.py::test_demo_trace_source_run_publishes_until_stopped"
+        ],
+        "glassbox.tracing.generator.x\u01c1DemoTraceSource\u01c1stop": [
+            "tests/test_demo_trace_source.py::test_demo_trace_source_start_and_stop_manage_background_thread"
+        ],
+        "glassbox.tracing.generator.x\u01c1DemoTraceSource\u01c1start": [
+            "tests/test_demo_trace_source.py::test_demo_trace_source_start_and_stop_manage_background_thread"
+        ],
+        "glassbox.tracing.generator.x\u01c1DemoTraceSource\u01c1_sample_payload": [
+            "tests/test_demo_trace_source.py::test_demo_trace_source_samples_known_payloads"
+        ],
+        "glassbox.tracing.generator.x\u01c1DemoTraceSource\u01c1_run": [
+            "tests/test_demo_trace_source.py::test_demo_trace_source_run_publishes_until_stopped"
+        ],
+        "glassbox.events.models.x\u01c1LLMEvent\u01c1to_dict": [
+            "tests/test_events_demo.py::test_random_event_generates_legacy_event_payload"
+        ],
+        "glassbox.events.demo.x_random_event": [
+            "tests/test_events_demo.py::test_random_event_generates_legacy_event_payload"
+        ],
+        "glassbox.providers.anthropic.x\u01c1AnthropicAdapter\u01c1supports": [
+            "tests/test_openai_interceptor.py::test_intercept_returns_unknown_clients_unchanged",
+            "tests/test_provider_registry.py::test_provider_registry_selects_matching_adapter_for_each_client_shape"
+        ],
+        "glassbox.providers.openrouter.x\u01c1OpenRouterAdapter\u01c1supports": [
+            "tests/test_openai_interceptor.py::test_intercept_returns_unknown_clients_unchanged",
+            "tests/test_provider_registry.py::test_provider_registry_selects_matching_adapter_for_each_client_shape"
+        ],
+        "glassbox.providers.ollama.x\u01c1OllamaAdapter\u01c1supports": [
+            "tests/test_openai_interceptor.py::test_intercept_returns_unknown_clients_unchanged",
+            "tests/test_provider_registry.py::test_provider_registry_selects_matching_adapter_for_each_client_shape"
+        ],
+        "glassbox.providers.azure_openai.x\u01c1AzureOpenAIAdapter\u01c1supports": [
+            "tests/test_openai_interceptor.py::test_intercept_returns_unknown_clients_unchanged",
+            "tests/test_provider_registry.py::test_provider_registry_selects_matching_adapter_for_each_client_shape"
+        ],
+        "glassbox.providers.gemini.x\u01c1GeminiAdapter\u01c1supports": [
+            "tests/test_openai_interceptor.py::test_intercept_returns_unknown_clients_unchanged",
+            "tests/test_provider_registry.py::test_provider_registry_selects_matching_adapter_for_each_client_shape"
+        ]
+    },
+    "duration_by_test": {
+        "tests/test_benchmarks.py::test_benchmark_provider_interception": 1.117339291027747,
+        "tests/test_benchmarks.py::test_benchmark_trace_creation": 0.1322559590335004,
+        "tests/test_benchmarks.py::test_benchmark_event_publishing": 0.8114862920483574,
+        "tests/test_benchmarks.py::test_benchmark_serialization": 0.1454765839735046,
+        "tests/test_benchmarks.py::test_benchmark_generator_throughput": 0.6455174589646049,
+        "tests/test_cli.py::test_cli_without_subcommand_launches_normal_ui": 0.008908001007512212,
+        "tests/test_cli.py::test_cli_watch_command_launches_normal_ui": 0.0014852910535410047,
+        "tests/test_cli.py::test_cli_demo_command_launches_demo_mode": 0.008778124989476055,
+        "tests/test_cli.py::test_cli_module_entrypoint_invokes_app": 0.0037747070309706032,
+        "tests/test_demo_engine.py::test_demo_engine_emits_deterministic_trace_sequence": 0.13714858301682398,
+        "tests/test_demo_trace_source.py::test_demo_trace_source_start_and_stop_manage_background_thread": 0.0011127089383080602,
+        "tests/test_demo_trace_source.py::test_demo_trace_source_generate_trace_uses_sample_payload": 0.0008826670236885548,
+        "tests/test_demo_trace_source.py::test_demo_trace_source_samples_known_payloads": 0.0009555399301461875,
+        "tests/test_demo_trace_source.py::test_demo_trace_source_run_publishes_until_stopped": 0.0025863749906420708,
+        "tests/test_event_bus.py::test_event_bus_subscribes_once_and_publishes_in_order": 0.0012576250010170043,
+        "tests/test_events_demo.py::test_random_event_generates_legacy_event_payload": 0.0012082899920642376,
+        "tests/test_insights.py::test_slow_request_rule_emits_warning_insight": 0.0009652500157244503,
+        "tests/test_insights.py::test_large_prompt_rule_emits_warning_insight": 0.0006879590218886733,
+        "tests/test_insights.py::test_failed_request_rule_emits_critical_insight": 0.00037599995266646147,
+        "tests/test_insights.py::test_retry_detected_rule_uses_session_operation_or_flags": 0.00028758292319253087,
+        "tests/test_insights.py::test_highest_cost_rule_emits_info_insight_for_session_high": 0.00016262498684227467,
+        "tests/test_inspector_insights_ui.py::test_slow_request_renders_insight_card": 0.03669483301928267,
+        "tests/test_inspector_insights_ui.py::test_large_prompt_renders_insight_card": 0.002490666985977441,
+        "tests/test_inspector_insights_ui.py::test_failed_request_renders_insight_card": 0.0020265409839339554,
+        "tests/test_inspector_insights_ui.py::test_retry_renders_insight_card": 0.0020895840716548264,
+        "tests/test_inspector_insights_ui.py::test_highest_cost_renders_insight_card": 0.0024256670149043202,
+        "tests/test_inspector_insights_ui.py::test_empty_state_renders_subdued_message": 0.0017659999430179596,
+        "tests/test_openai_interceptor.py::test_intercept_publishes_trace": 0.0006134990253485739,
+        "tests/test_openai_interceptor.py::test_intercept_extracts_text_from_structured_inputs_and_keeps_unicode": 0.0007432920392602682,
+        "tests/test_openai_interceptor.py::test_intercept_returns_unknown_clients_unchanged": 0.00036341603845357895,
+        "tests/test_openai_interceptor_edge_cases.py::test_openai_interception_handles_empty_prompt_and_unknown_model": 0.0007135430350899696,
+        "tests/test_openai_interceptor_edge_cases.py::test_openai_supports_rejects_azure_clients": 0.00020033394685015082,
+        "tests/test_openai_interceptor_edge_cases.py::test_openai_interception_handles_responses_without_usage_metadata": 0.00048433407209813595,
+        "tests/test_openai_interceptor_edge_cases.py::test_openai_interception_falls_back_when_model_is_not_a_string": 0.00044475001050159335,
+        "tests/test_provider_registry.py::test_provider_registry_discovers_builtin_adapters": 0.00016799994045868516,
+        "tests/test_provider_registry.py::test_provider_registry_selects_matching_adapter_for_each_client_shape": 0.000750041042920202,
+        "tests/test_readme_examples.py::test_readme_installation_example_builds_and_imports_package": 3.4632669579586945,
+        "tests/test_readme_examples.py::test_readme_quick_start_example_uses_public_intercept_api": 0.0026985839940607548,
+        "tests/test_session_summary_ui.py::test_session_summary_renders_metrics_and_analysis_cards": 0.009345665981527418,
+        "tests/test_session_summary_ui.py::test_session_summary_empty_state_is_subdued": 0.002483957970980555,
+        "tests/test_trace_builder.py::test_trace_builder_computes_latency_and_publishes_trace": 0.0006404160521924496,
+        "tests/test_trace_builder.py::test_trace_builder_respects_explicit_latency_and_cost": 0.0005838340148329735,
+        "tests/test_trace_model.py::test_trace_defaults_are_stable_and_serializable": 0.0005403329851105809,
+        "tests/test_trace_model.py::test_trace_preserves_unicode_and_emojis_through_serialization": 0.0005187919596210122,
+        "tests/test_trace_stress.py::test_many_traces_can_be_built_and_published_concurrently": 0.028503709007054567
+    },
+    "stats_time": 3.2376530000000003
+}

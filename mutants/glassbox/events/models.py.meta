@@ -1,0 +1,18 @@
+{
+    "exit_code_by_key": {
+        "glassbox.events.models.x\u01c1LLMEvent\u01c1to_dict__mutmut_1": 0,
+        "glassbox.events.models.x\u01c1LLMEvent\u01c1to_dict__mutmut_2": 0,
+        "glassbox.events.models.x\u01c1LLMEvent\u01c1to_dict__mutmut_3": 0
+    },
+    "type_check_error_by_key": {},
+    "durations_by_key": {
+        "glassbox.events.models.x\u01c1LLMEvent\u01c1to_dict__mutmut_3": 0.269873,
+        "glassbox.events.models.x\u01c1LLMEvent\u01c1to_dict__mutmut_1": 0.293056,
+        "glassbox.events.models.x\u01c1LLMEvent\u01c1to_dict__mutmut_2": 0.295505
+    },
+    "estimated_durations_by_key": {
+        "glassbox.events.models.x\u01c1LLMEvent\u01c1to_dict__mutmut_1": 0.0012082899920642376,
+        "glassbox.events.models.x\u01c1LLMEvent\u01c1to_dict__mutmut_2": 0.0012082899920642376,
+        "glassbox.events.models.x\u01c1LLMEvent\u01c1to_dict__mutmut_3": 0.0012082899920642376
+    }
+}

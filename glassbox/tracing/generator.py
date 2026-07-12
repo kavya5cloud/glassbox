@@ -6,7 +6,6 @@ import random
 import threading
 import time
 from datetime import datetime, timedelta, timezone
-from typing import Callable
 
 from .bus import EventBus
 from .trace import Trace
@@ -83,7 +82,10 @@ class DemoTraceSource:
                 "Google",
                 "Gemini 2.5",
                 "Explain the root cause of the packaging metadata issue.",
-                "The issue was caused by incompatible license metadata emitted by the build backend.",
+                (
+                    "The issue was caused by incompatible license metadata "
+                    "emitted by the build backend."
+                ),
             ),
         ]
         return random.choice(provider_model_pairs)

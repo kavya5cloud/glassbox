@@ -1,0 +1,18 @@
+{
+    "exit_code_by_key": {
+        "glassbox.tracing.trace.x\u01c1Trace\u01c1to_dict__mutmut_1": 1,
+        "glassbox.tracing.trace.x\u01c1Trace\u01c1to_dict__mutmut_2": 1,
+        "glassbox.tracing.trace.x\u01c1Trace\u01c1to_dict__mutmut_3": 1
+    },
+    "type_check_error_by_key": {},
+    "durations_by_key": {
+        "glassbox.tracing.trace.x\u01c1Trace\u01c1to_dict__mutmut_1": 0.26437,
+        "glassbox.tracing.trace.x\u01c1Trace\u01c1to_dict__mutmut_2": 0.266464,
+        "glassbox.tracing.trace.x\u01c1Trace\u01c1to_dict__mutmut_3": 0.257388
+    },
+    "estimated_durations_by_key": {
+        "glassbox.tracing.trace.x\u01c1Trace\u01c1to_dict__mutmut_1": 0.1465357089182362,
+        "glassbox.tracing.trace.x\u01c1Trace\u01c1to_dict__mutmut_2": 0.1465357089182362,
+        "glassbox.tracing.trace.x\u01c1Trace\u01c1to_dict__mutmut_3": 0.1465357089182362
+    }
+}

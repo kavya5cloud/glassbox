@@ -1,0 +1,36 @@
+{
+    "exit_code_by_key": {
+        "glassbox.intercept.x_intercept__mutmut_1": 1,
+        "glassbox.intercept.x_intercept__mutmut_2": 0,
+        "glassbox.intercept.x_intercept__mutmut_3": 1,
+        "glassbox.intercept.x_intercept__mutmut_4": 1,
+        "glassbox.intercept.x_intercept__mutmut_5": 1,
+        "glassbox.intercept.x_intercept__mutmut_6": 1,
+        "glassbox.intercept.x_intercept__mutmut_7": 1,
+        "glassbox.intercept.x_intercept__mutmut_8": 1,
+        "glassbox.intercept.x_intercept__mutmut_9": 1
+    },
+    "type_check_error_by_key": {},
+    "durations_by_key": {
+        "glassbox.intercept.x_intercept__mutmut_1": 0.253883,
+        "glassbox.intercept.x_intercept__mutmut_3": 0.268861,
+        "glassbox.intercept.x_intercept__mutmut_4": 0.274822,
+        "glassbox.intercept.x_intercept__mutmut_6": 0.247268,
+        "glassbox.intercept.x_intercept__mutmut_5": 0.257291,
+        "glassbox.intercept.x_intercept__mutmut_2": 0.47988,
+        "glassbox.intercept.x_intercept__mutmut_7": 0.272964,
+        "glassbox.intercept.x_intercept__mutmut_8": 0.251851,
+        "glassbox.intercept.x_intercept__mutmut_9": 0.257284
+    },
+    "estimated_durations_by_key": {
+        "glassbox.intercept.x_intercept__mutmut_1": 1.12340070924256,
+        "glassbox.intercept.x_intercept__mutmut_2": 1.12340070924256,
+        "glassbox.intercept.x_intercept__mutmut_3": 1.12340070924256,
+        "glassbox.intercept.x_intercept__mutmut_4": 1.12340070924256,
+        "glassbox.intercept.x_intercept__mutmut_5": 1.12340070924256,
+        "glassbox.intercept.x_intercept__mutmut_6": 1.12340070924256,
+        "glassbox.intercept.x_intercept__mutmut_7": 1.12340070924256,
+        "glassbox.intercept.x_intercept__mutmut_8": 1.12340070924256,
+        "glassbox.intercept.x_intercept__mutmut_9": 1.12340070924256
+    }
+}

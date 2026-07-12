@@ -1,0 +1,86 @@
+Screen {
+    background: #081018;
+    color: #d7e0ea;
+}
+
+TraceDashboard {
+    height: 100%;
+    padding: 0 1;
+}
+
+#titlebar {
+    height: 1;
+    padding: 0 1;
+    margin: 0 0 1 0;
+    color: #f5f7fb;
+    background: #0d1520;
+    border-bottom: solid #1f2a37;
+    content-align: left middle;
+}
+
+#workspace {
+    height: 1fr;
+    layout: horizontal;
+    margin: 0 0 1 0;
+}
+
+#feed-pane,
+#inspector-pane {
+    border: round #1f2a37;
+    background: #0b1320;
+    padding: 0;
+    height: 100%;
+}
+
+#feed-pane {
+    width: 2fr;
+    min-width: 60;
+    margin-right: 1;
+}
+
+#inspector-pane {
+    width: 3fr;
+    min-width: 72;
+}
+
+#trace-feed {
+    height: 100%;
+    border: none;
+    background: transparent;
+}
+
+#trace-inspector {
+    height: 100%;
+    padding: 1;
+    overflow-y: auto;
+    background: transparent;
+}
+
+.trace-inspector-content {
+    width: 100%;
+}
+
+#status-bar {
+    height: 3;
+    padding: 0 1;
+    color: #aab7c4;
+    background: #0d1520;
+    border-top: solid #1f2a37;
+    content-align: left middle;
+}
+
+App.compact #workspace {
+    layout: vertical;
+}
+
+App.compact #feed-pane {
+    width: 100%;
+    min-width: 0;
+    margin-right: 0;
+    margin-bottom: 1;
+}
+
+App.compact #inspector-pane {
+    width: 100%;
+    min-width: 0;
+}
