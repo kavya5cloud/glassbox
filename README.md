@@ -11,7 +11,7 @@
   DevTools for LLM applications
   Inspect every prompt. Replay every run.
   Open source · Local first · Zero telemetry
-```
+```    
 
 Wrap your client in one line and watch every LLM call your app makes stream into your terminal — prompts, responses, latency, and token usage, live. No dashboard to deploy, no account, no data leaving your machine.  
 
