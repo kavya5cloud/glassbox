@@ -143,8 +143,6 @@ glassbox/
 
 ## Roadmap
 
-<<<<<<< HEAD
-=======
 **Available now**
 >>>>>>> core-rewrite
 Today
@@ -157,7 +155,6 @@ Today
 
 ✅ Glassbox IR
 
-Next
 
 ⬜ Dataset Engine
 
