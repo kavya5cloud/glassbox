@@ -19,7 +19,7 @@ Wrap your client in one line and watch every LLM call your app makes stream into
 [![Python](https://img.shields.io/pypi/pyversions/glassbox)](https://pypi.org/project/glassbox)
 [![License](https://img.shields.io/badge/license-Apache%202.0-blue)](LICENSE)
 
-```bash
+```bash 
 pip install glassbox
 glassbox demo   # try it now
 ```
